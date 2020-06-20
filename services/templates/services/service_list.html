@@ -1,0 +1,84 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}Servicos{% endblock %}
+
+{% block content %}
+<!-- Breadcrumbs -->
+<section class="bg-gray-7">
+  <div class="breadcrumbs-custom box-transform-wrap context-dark">
+    <div class="container">
+      <h3 class="breadcrumbs-custom-title">Servicios</h3>
+      <div class="breadcrumbs-custom-decor"></div>
+    </div>
+    <div class="box-transform" style="background-image: url({% static 'core/images/bg-forms.jpg' %});"></div>
+  </div>
+  <div class="container">
+    <ul class="breadcrumbs-custom-path">
+      <li><a href="{% url 'home' %}">Inicio</a></li>
+      <li class="active">Servicios</li>
+    </ul>
+  </div>
+</section>
+<!-- Services 2-->
+<section class="section section-lg bg-default">
+  <div class="container">
+    <div class="row row-40 justify-content-center">
+      {% for service in service_list|dictsort:"id" reversed %}
+      <div class="col-md-6 col-lg-5 col-xl-4">
+        
+        <!-- Services Classic-->
+        <article class="services-classic"><a class="services-classic-figure" href="{% url 'services:service' service.id service.title|slugify %}"><img src="{{service.image.url}}" alt="" width="370" height="274"/></a>
+          <div class="services-classic-caption">
+            <div class="unit align-items-lg-center">
+              <div class="unit-left"><span class="services-classic-icon linearicons-cloud-gear icon-54"></span></div>
+              <div class="unit-body">
+                <h5 class="services-classic-title"><a href="{% url 'services:service' service.id service.title|slugify %}">{{service.title}}</a></h5>
+                <p class="services-classic-text">{{service.subtitle}}</p>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="pagination-wrap">
+      <!-- Bootstrap Pagination-->
+      {% if is_paginated %}
+        <nav aria-label="Page navigation">
+          <ul class="pagination">
+            {% if page_obj.has_previous %}
+              <li class="page-item page-item-control ">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                  <span class="icon" aria-hidden="true"></span>
+                </a>
+              </li>
+            {% else %}
+              <li class="page-item page-item-control disabled">
+                <a class="page-link" href="#" tabindex="-1">&laquo;</a>
+              </li>
+            {% endif %}
+            {% for i in paginator.page_range %}
+              <li class="page-item {% if page_obj.number == i %}active{% endif %}">
+                <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+              </li>
+            {% endfor %}
+            {% if page_obj.has_next %}
+              <li class="page-item page-item-control">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                  <span class="icon" aria-hidden="true"></span>
+                </a>
+              </li>
+            {% else %}
+              <li class="page-item page-item-control disabled">
+                <a class="page-link" href="#" tabindex="-1">&raquo;</a>
+              </li>
+            {% endif %}
+          </ul>
+        </nav>
+        {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

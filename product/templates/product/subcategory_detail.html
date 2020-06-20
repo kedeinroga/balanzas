@@ -1,0 +1,104 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}{{subcategory.name}}{% endblock %}
+
+
+
+{% block content %}
+<!-- Breadcrumbs -->
+<section class="bg-gray-7">
+  <div class="breadcrumbs-custom box-transform-wrap context-dark">
+    <div class="container">
+      <h3 class="breadcrumbs-custom-title">{{subcategory.name}}</h3>
+      <div class="breadcrumbs-custom-decor"></div>
+    </div>
+    {% if subcategory.image %}
+    <div class="box-transform" style="background-image: url({{subcategory.image.url}});"></div>
+    {% else %}
+    <div class="box-transform" style="background-image: url({% static 'core/images/bg-blog.jpg' %});"></div>
+    {% endif %}
+  </div>
+  <div class="container">
+    <ul class="breadcrumbs-custom-path">
+      <li><a href="{% url 'home' %}">Inicio</a></li>
+      <li><a href="{% url 'product:products' %}">Productos</a></li>
+      <li><a href="{% url 'product:category' subcategory.categories.id subcategory.categories.name|slugify %}">{{subcategory.categories}}</a></li>
+      <li class="active">{{subcategory.name}}</li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- Section Shop-->
+<section class="section section-lg bg-default text-md-left">
+  <div class="container">
+    <div class="row row-60">
+      
+      <div class="col-lg-12 col-xl-12">
+        <p>{{category.description|safe}}</p>
+        <div class="row row-30 row-md-40 row-xl-60">
+          {% for product in subcategory.get_products.all %}
+      <div class="col-sm-6 col-xl-4">
+        <!-- Product-->
+        <article class="product">
+          <div class="product-figure"><img src="{{product.image1.url}}" alt="" width="195" height="141"/>
+          </div>
+          <div class="product-rating"><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star text-gray-13"></span>
+          </div>
+          <h6 class="product-title">{{product.title|safe}}</h6>
+          <div class="product-price-wrap">
+            <div class="product-price">{{product.precio}}</div>
+          </div>
+          <div class="product-button">
+            <!--<div class="button-wrap"><a class="button button-xs button-primary button-winona" href="cart-page.html">Add to cart</a></div>-->
+            <div class="button-wrap"><a class="button button-xs button-secondary button-winona" href="{% url 'product:detail' product.id product.title|slugify %}">Ver Producto</a></div>
+          </div>
+        </article>
+      </div>
+      {% endfor %}
+          
+        </div>
+        <div class="pagination-wrap">
+          <!-- Bootstrap Pagination-->
+          {% if is_paginated %}
+            <nav aria-label="Page navigation">
+              <ul class="pagination">
+                {% if page_obj.has_previous %}
+                  <li class="page-item page-item-control ">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                      <span class="icon" aria-hidden="true"></span>
+                    </a>
+                  </li>
+                {% else %}
+                  <li class="page-item page-item-control disabled">
+                    <a class="page-link" href="#" tabindex="-1">&laquo;</a>
+                  </li>
+                {% endif %}
+                {% for i in paginator.page_range %}
+                  <li class="page-item {% if page_obj.number == i %}active{% endif %}">
+                    <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                  </li>
+                {% endfor %}
+                {% if page_obj.has_next %}
+                  <li class="page-item page-item-control">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                      <span class="icon" aria-hidden="true"></span>
+                    </a>
+                  </li>
+                {% else %}
+                  <li class="page-item page-item-control disabled">
+                    <a class="page-link" href="#" tabindex="-1">&raquo;</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </nav>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

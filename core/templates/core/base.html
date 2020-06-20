@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html class="wide wow-animation" lang="es">
+  <head>
+    <title>{% block title %}{% endblock %} | Balanzas-Perú</title>
+
+    {% load static %}
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="{% static 'core/images/favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'core/images/favicon.ico' %}" type="image/x-icon">
+    
+    
+    <!-- Stylesheets-->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:100,300,300i,400,500,600,700,900%7CRaleway:500">
+    <link rel="stylesheet" href="{% static 'core/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/fonts.css' %}">
+
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+    <link href="{% static 'core/css/custom_ckeditor.css' %}" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}" id="main-styles-link">
+    
+  </head>
+  <body>
+    <div class="preloader">
+      <div class="wrapper-triangle">
+        <div class="pen">
+          <div class="line-triangle">
+            <div class="triangle"></div>
+            <div class="triangle"></div>
+            <div class="triangle"></div>
+            <div class="triangle"></div>
+            <div class="triangle"></div>
+            <div class="triangle"></div>
+            <div class="triangle"></div>
+          </div>
+          <div class="line-triangle">
+            <div class="triangle"></div>
+            <div class="triangle"></div>
+            <div class="triangle"></div>
+            <div class="triangle"></div>
+            <div class="triangle"></div>
+            <div class="triangle"></div>
+            <div class="triangle"></div>
+          </div>
+          <div class="line-triangle">
+            <div class="triangle"></div>
+            <div class="triangle"></div>
+            <div class="triangle"></div>
+            <div class="triangle"></div>
+            <div class="triangle"></div>
+            <div class="triangle"></div>
+            <div class="triangle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page">
+      
+     <!-- Page Header-->
+     {% block menu %}
+      <header class="section page-header">
+        <!-- RD Navbar-->
+        <div class="rd-navbar-wrap">
+        <nav class="rd-navbar rd-navbar-modern" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="150px" data-xl-stick-up-offset="150px" data-xxl-stick-up-offset="150px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+            <div class="rd-navbar-inner-outer">
+            <div class="rd-navbar-inner">
+                <!-- RD Navbar Panel-->
+                <div class="rd-navbar-panel">
+                <!-- RD Navbar Toggle-->
+                <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                <!-- RD Navbar Brand-->
+                <div class="rd-navbar-brand"><a class="brand" href="{% url 'home' %}"><img class="brand-logo-dark" src="{% static 'core/images/logo-default-203x65.png' %}" alt="" width="203" height="65"/></a></div>
+                </div>
+                <div class="rd-navbar-right rd-navbar-nav-wrap">
+                <div class="rd-navbar-aside">
+                    <ul class="rd-navbar-contacts-2">
+                    <li>
+                        <div class="unit unit-spacing-xs">
+                        <div class="unit-left"><span class="icon mdi mdi-phone"></span></div>
+                        <div class="unit-body"><a class="phone" href="tel:#">01-5792464</a></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="unit unit-spacing-xs">
+                        <div class="unit-left"><span class="icon mdi mdi-map-marker"></span></div>
+                        <div class="unit-body"><a class="address" href="{% url 'home' %}#"> Calle los Dátiles N° 904 - 2do Piso - SJL</a></div>
+                        </div>
+                    </li>
+                    </ul>
+                    <ul class="list-share-2">
+                    <li><a class="icon mdi mdi-facebook" href="{% url 'home' %}#"></a></li>
+                    <li><a class="icon mdi mdi-twitter" href="{% url 'home' %}#"></a></li>
+                    <li><a class="icon mdi mdi-instagram" href="{% url 'home' %}#"></a></li>
+                    <li><a class="icon mdi mdi-google-plus" href="{% url 'home' %}#"></a></li>
+                    </ul>
+                </div>
+                <div class="rd-navbar-main">
+                    <!-- RD Navbar Nav-->
+                    <ul class="rd-navbar-nav">
+                    <li class="rd-nav-item {% if request.path == '/' %}active{% endif %}"><a class="rd-nav-link" href="{% url 'home' %}">Inicio</a>
+                    </li>
+                    <li class="rd-nav-item {% if request.path == '/services/' %}active{% endif %}"><a class="rd-nav-link" href="{% url 'services:services' %}">Servicios</a>
+                        <!-- RD Navbar Megamenu-->
+                        <ul class="rd-menu rd-navbar-megamenu">
+                          {% for page in scat_context %}
+                        <li class="rd-megamenu-item">
+                            <h6 class="rd-megamenu-title"><a href="{% url 'services:category' page.id page.name|slugify %}">{{page.name}}</a></h6>
+                            <ul class="rd-megamenu-list">
+                              {% for subpage in ssub_context %}
+                              {% if  page.id ==  subpage.categories_id  %}
+                              <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="{% url 'services:subcategory' subpage.id subpage.name|slugify %}">{{subpage.name}}</a></li>
+                              {% endif %}
+                              {% endfor %}
+                            
+                            
+                            </ul>
+                        </li>
+                        {% endfor %}
+                        
+                        </ul>
+                    </li>
+                        <!-- RD Navbar Dropdown-->
+                        <!--<ul class="rd-menu rd-navbar-dropdown">
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="services-2.html">Services 2</a></li>
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="services-3.html">Services 3</a></li>
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="services-4.html">Services 4</a></li>
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="single-service.html">Single service</a></li>
+                        </ul>
+                    </li>-->
+                    <!--<li class="rd-nav-item"><a class="rd-nav-link" href="grid-gallery.html">Gallery</a>
+                    </li>-->
+                    
+                    <li class="rd-nav-item {% if request.path == '/product/' %}active{% endif %}"><a class="rd-nav-link" href="{% url 'product:products' %}">Productos</a>
+                        <!-- RD Navbar Megamenu-->
+                        <ul class="rd-menu rd-navbar-megamenu">
+                          {% for page in pcat_context %}
+                        <li class="rd-megamenu-item">
+                            <h6 class="rd-megamenu-title"><a href="{% url 'product:category' page.id page.name|slugify %}">{{page.name}}</a></h6>
+                            <ul class="rd-megamenu-list">
+                              {% for subpage in psub_context %}
+                              {% if  page.id ==  subpage.categories_id  %}
+                              <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="{% url 'product:subcategory' subpage.id subpage.name|slugify %}">{{subpage.name}}</a></li>
+                              {% endif %}
+                              {% endfor %}
+                            
+                            
+                            </ul>
+                        </li>
+                        {% endfor %}
+                        
+                        </ul>
+                    </li>
+                    <li class="rd-nav-item {% if request.path|slice:":6" == '/blog/' %}active{% endif %}"><a class="rd-nav-link" href="{% url 'blog:blog' %}">Blog</a>
+                        <!-- RD Navbar Megamenu-->
+                            <ul class="rd-menu rd-navbar-dropdown">
+                              {% for page in post_context %}
+                              <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{% url 'blog:category' page.id page.name|slugify %}">{{page.name}}</a></li>
+                              {% endfor %}
+                            </ul>
+                    </li>
+                    <li class="rd-nav-item {% if request.path == '/contact/' %}active{% endif %}"><a class="rd-nav-link" href="{% url 'contact' %}">Contacto</a>
+                        <!-- RD Navbar Dropdown-->
+                        <!--<ul class="rd-menu rd-navbar-dropdown">
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="typography.html">Typography</a></li>
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="buttons.html">Buttons</a></li>
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="forms.html">Forms</a></li>
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="tabs-and-accordions.html">Tabs and accordions</a></li>
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="progress-bars.html">Progress bars</a></li>
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="grid-system.html">Grid system</a></li>
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="tables.html">Tables</a></li>
+                        </ul>-->
+                    </li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+            </div>
+        </nav>
+        </div>
+        </header>
+     {% endblock %}
+      {% block content %}  {% endblock %}
+
+      <!-- Page Footer-->
+      <footer class="section footer-classic context-dark footer-classic-2">
+        <div class="footer-classic-content">
+          <div class="container">
+            <div class="row row-50 row-lg-0 no-gutters">
+              <div class="col-sm-6 col-lg-4 wow fadeInRight" data-wow-delay="0s">
+                <div class="footer-classic-header">
+                  <h6 class="footer-classic-title">Balanzas Perú</h6>
+                </div>
+                <div class="footer-classic-body">
+                  <ul class="footer-classic-list d-inline-block d-sm-block">
+                    <li><a href="{% url 'about' %}">Nosotros</a></li>
+                    <li><a href="{% url 'home' %}#">FAQ</a></li>
+                    <li><a href="{% url 'blog:blog' %}">Blog</a></li>
+                    <li><a href="{% url 'home' %}#">Prices</a></li>
+                    <li><a href="{% url 'services:services' %}">Servicios</a></li>
+                    <li><a href="{% url 'contact' %}">Contáctenos</a></li>
+                  </ul>
+                  <ul class="list-inline footer-social-list">
+                    <li><a class="icon mdi mdi-facebook" href="{% url 'home' %}#"></a></li>
+                    <li><a class="icon mdi mdi-twitter" href="{% url 'home' %}#"></a></li>
+                    <li><a class="icon mdi mdi-instagram" href="{% url 'home' %}#"></a></li>
+                    <li><a class="icon mdi mdi-google-plus" href="{% url 'home' %}#"></a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-sm-6 col-lg-4 wow fadeInRight" data-wow-delay=".1s">
+                <div class="footer-classic-header">
+                  <div class="box-width-230">
+                    <h6 class="footer-classic-title">Contactar</h6>
+                  </div>
+                </div>
+                <div class="footer-classic-body">
+                  <div class="box-width-230">
+                    <div class="footer-classic-contacts">
+                      <div class="footer-classic-contacts-item">
+                        <div class="unit unit-spacing-sm align-items-center">
+                          <div class="unit-left"><span class="icon icon-24 mdi mdi-phone"></span></div>
+                          <div class="unit-body"><a class="phone" href="tel:#">01-5792464 </a></div>
+                        </div>
+                        <div class="unit unit-spacing-sm align-items-center">
+                          <div class="unit-left"><span class="icon icon-24 mdi mdi-phone"></span></div>
+                          <div class="unit-body"><a class="phone" href="tel:#">01-2921680  </a></div>
+                        </div>
+                      </div>
+                      <div class="footer-classic-contacts-item">
+                        <div class="unit unit-spacing-sm align-items-center">
+                          <div class="unit-left"><span class="icon mdi mdi-email"></span></div>
+                          <div class="unit-body"><a class="mail" href="mailto:#">info@i2dsoluciones.com </a></div>
+                        </div>
+                      </div>
+                    </div><a class="button button-sm button-primary button-winona" href="{% url 'contact' %}">Contáctenos</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 position-static">
+                <div class="footer-classic-gmap">
+                  <div class="google-map-container" data-center="Calle los Dátiles N° 940-2do Piso-SJL.">
+                    <div><iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d410.23635449560703!2d-76.99722205272042!3d-11.985022218572173!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x9105c570440901c5%3A0x9a47b426261aecff!2sCalle%20los%20Datiles%20904%2C%20San%20Juan%20de%20Lurigancho%2015434!3m2!1d-11.985044799999999!2d-76.9970549!5e0!3m2!1ses!2spe!4v1591134548382!5m2!1ses!2spe" width="400" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe></div>
+                    <ul class="google-map-markers">
+                      <li data-location="Calle los Dátiles N° 940-2do Piso-SJL." data-description="Lima, Perú" data-icon="{% static 'core/images/gmap_marker.png' %}" data-icon-active="{% static 'core/images/gmap_marker_active.png' %}"></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer-classic-panel">
+          <div class="container">
+            <!-- Rights-->
+            <p class="rights"><span>&copy;&nbsp;</span><span class="copyright-year"></span><span>&nbsp;</span><span>Balanzas Perú</span><span>.&nbsp;</span><a href="#">Todos los derechos reservados</a></p>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <!-- Javascript-->
+    <script src="{% static 'core/js/core.min.js' %}"></script>
+    <script src="{% static 'core/js/script.js' %}"></script>
+    
+    
+
+  </body>
+</html>

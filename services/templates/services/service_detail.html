@@ -1,0 +1,80 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}{{object.title}}{% endblock %}
+
+{% block content %}
+<!-- Breadcrumbs -->
+<section class="bg-gray-7">
+  <div class="breadcrumbs-custom box-transform-wrap context-dark">
+    <div class="container">
+      <h3 class="breadcrumbs-custom-title">{{object.title}}</h3>
+      <div class="breadcrumbs-custom-decor"></div>
+    </div>
+    <div class="box-transform" style="background-image: url({% static 'core/images/bg-services.jpg' %});"></div>
+  </div>
+  <div class="container">
+    <ul class="breadcrumbs-custom-path">
+      <li><a href="{% url 'home' %}">Inicio</a></li>
+      <li><a href="{% url 'services:services' %}">Servicios</a></li>
+      <li class="active">Detalles</li>
+    </ul>
+  </div>
+</section>
+<!-- Services-->
+<section class="section section-sm section-first bg-default text-left">
+  <div class="container">
+    <div class="row row-60">
+      <div class="col-md-7 col-xl-8">
+        <div class="single-service"><img src="{{object.image.url}}" alt="" width="770" height="426"/>
+          <h4>{{object.title}}</h4>
+          <p>{{object.content|safe}}</p>
+          
+        </div>
+      </div>
+      <div class="col-md-5 col-xl-4">
+        <div class="aside aside-services">
+          <div class="row row-60">
+            
+            <div class="aside-item col-sm-6 col-md-12">
+              <h5 class="aside-services-title">Contáctenos</h5>
+              <!-- Box contacts-->
+              <div class="box-contacts">
+                <div class="box-contacts-item">
+                  <div class="box-contacts-title">Llámenos</div>
+                  <div class="unit unit-spacing-xs flex-column flex-md-row">
+                    <div class="unit-left"><span class="icon icon-24 mdi mdi-phone"></span></div>
+                    <div class="unit-body"><a class="phone" href="tel:#">01-5792464</a></div>
+                    <div class="unit-body"><a class="phone" href="tel:#">01-2921680</a></div>
+                  </div>
+                </div>
+                <div class="box-contacts-item">
+                  <div class="box-contacts-title">Oficina</div>
+                  <div class="unit unit-spacing-xs flex-column flex-md-row">
+                    <div class="unit-left"><span class="icon icon-28 mdi mdi-map-marker"></span></div>
+                    <div class="unit-body"><a class="address" href="single-service.html#">Calle los Dátiles N° 904 - 2do Piso - SJL</a></div>
+                  </div>
+                </div>
+                <div class="box-contacts-item">
+                  <div class="box-contacts-title">E-mail</div>
+                  <div class="unit unit-spacing-xs flex-column flex-md-row">
+                    <div class="unit-left"><span class="icon mdi mdi-email"></span></div>
+                    <div class="unit-body"><a class="mail" href="mailto:#">info@i2dsoluciones.com</a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="aside-item col-sm-6 col-md-12">
+              <h5 class="aside-services-title">Nuestro brochure</h5><a class="button button-lg button-icon button-icon-left button-primary button-winona" href="{{object.brochure.url}}"><span class="icon mdi mdi-download"></span><span>Descargar</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+{% endblock %}

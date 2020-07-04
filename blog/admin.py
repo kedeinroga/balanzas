@@ -1,5 +1,5 @@
 from django.contrib import admin
-from mptt.admin import MPTTModelAdmin,DraggableMPTTAdmin
+#from mptt.admin import MPTTModelAdmin,DraggableMPTTAdmin
 from .models import Category, Post
 
 # Register your models here.

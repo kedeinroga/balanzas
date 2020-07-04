@@ -14,8 +14,8 @@
       <h3 class="breadcrumbs-custom-title">{{subcategory.name}}</h3>
       <div class="breadcrumbs-custom-decor"></div>
     </div>
-    {% if category.image %}
-    <div class="box-transform" style="background-image: url({{category.image.url}});"></div>
+    {% if subcategory.image %}
+    <div class="box-transform" style="background-image: url({{subcategory.image.url}});"></div>
     {% else %}
     <div class="box-transform" style="background-image: url({% static 'core/images/bg-blog.jpg' %});"></div>
     {% endif %}

@@ -1,95 +1,115 @@
-{% extends 'core/base.html' %}
-
-{% load static %}
-
-{% block title %}Productos{% endblock %}
-
+{% extends 'core/base.html' %} 
+{% load static %} 
+{% block title %}Productos{% endblock %} 
 {% block content %}
 
 <!-- Breadcrumbs -->
 <section class="bg-gray-7">
     <div class="breadcrumbs-custom box-transform-wrap context-dark">
-      <div class="container">
-        <h3 class="breadcrumbs-custom-title">Productos</h3>
-        <div class="breadcrumbs-custom-decor"></div>
-      </div>
-      <div class="box-transform" style="background-image: url({% static 'core/' %}images/bg-forms.jpg);"></div>
+        <div class="container">
+            <h3 class="breadcrumbs-custom-title">Productos</h3>
+            <div class="breadcrumbs-custom-decor"></div>
+        </div>
+        <div class="box-transform" style="background-image: url({% static 'core/' %}images/bg-forms.jpg);"></div>
     </div>
     <div class="container">
-      <ul class="breadcrumbs-custom-path">
-        <li><a href="{% url 'home' %}">Inicio</a></li>
-        <li class="active">Productos</li>
-      </ul>
+        <ul class="breadcrumbs-custom-path">
+            <li><a href="{% url 'home' %}">Inicio</a></li>
+            <li class="active">Productos</li>
+        </ul>
     </div>
-  </section>
-  <!-- Section Shop-->
-  <section class="section section-lg bg-default text-md-left">
+</section>
+<!-- Section Shop-->
+<section class="section section-lg bg-default text-md-left">
     <div class="container">
-      <div class="row row-60">
-        
-        <div class="col-lg-8 col-xl-9">
-          
-          <div class="row row-30 row-md-40 row-xl-60">
-            {% for product in product_list|dictsort:"id" reversed %}
-        <div class="col-sm-6 col-xl-4">
-          <!-- Product-->
-          <article class="product">
-            <div class="product-figure"><img src="{{product.image1.url}}" alt="" width="195" height="141"/>
+        <div class="row row-60">
+            <div class="col-lg-4 col-xl-3">
+                <div class="aside row row-60">
+                    <div class="aside-item col-sm-6 col-lg-12">
+                        <h6 class="aside-title">Categorias</h6>
+                        <ul class="list-marked-2">
+                            {% for page in pcat_context %}
+                            <li><a href="{% url 'product:category' page.id page.name|slugify %}">{{page.name}}</a></li>
+                            {% for subpage in psub_context %} {% if page.id == subpage.categories_id %}
+                            <br>
+                            <h6 class="aside-title">Subcategorias</h6>
+                            <li><a href="{% url 'product:subcategory' subpage.id subpage.name|slugify %}">{{subpage.name}}</a></li>
+                            {% endif %} {% endfor %} {% endfor %}
+                        </ul>
+                        <!-- RD Search Form-->
+                        <form class="form-search rd-search form-search" action="search-results.html" method="GET">
+                            <div class="form-wrap">
+                                <label class="form-label" for="search-form">Buscar..</label>
+                                <input class="form-input" id="search-form" type="text" name="s" autocomplete="off">
+                                <button class="button-search fl-bigmug-line-search74" type="submit"></button>
+                            </div>
+                        </form>
+                    </div>
+
+
+                </div>
             </div>
-            <div class="product-rating"><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star text-gray-13"></span>
+            <div class="col-lg-8 col-xl-9">
+
+                <div class="row row-30 row-md-40 row-xl-60">
+                    {% for product in product_list|dictsort:"id" reversed %}
+                    <div class="col-sm-6 col-xl-4">
+                        <!-- Product-->
+                        <article class="product">
+                            <div class="product-figure"><img src="{{product.image1.url}}" alt="" width="195" height="141" />
+                            </div>
+                            <div class="product-rating"><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star text-gray-13"></span>
+                            </div>
+                            <h6 class="product-title">{{product.title|safe}}</h6>
+                            <div class="product-price-wrap">
+                                <div class="product-price">{{product.precio}}</div>
+                            </div>
+                            <div class="product-button">
+                                <!--<div class="button-wrap"><a class="button button-xs button-primary button-winona" href="cart-page.html">Add to cart</a></div>-->
+                                <div class="button-wrap"><a class="button button-xs button-secondary button-winona" href="{% url 'product:detail' product.id product.title|slugify %}">Ver Producto</a></div>
+                            </div>
+                        </article>
+                    </div>
+                    {% endfor %}
+
+                </div>
+                <div class="pagination-wrap">
+                    <!-- Bootstrap Pagination-->
+                    {% if is_paginated %}
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            {% if page_obj.has_previous %}
+                            <li class="page-item page-item-control ">
+                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                                    <span class="icon" aria-hidden="true"></span>
+                                </a>
+                            </li>
+                            {% else %}
+                            <li class="page-item page-item-control disabled">
+                                <a class="page-link" href="#" tabindex="-1">&laquo;</a>
+                            </li>
+                            {% endif %} {% for i in paginator.page_range %}
+                            <li class="page-item {% if page_obj.number == i %}active{% endif %}">
+                                <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                            </li>
+                            {% endfor %} {% if page_obj.has_next %}
+                            <li class="page-item page-item-control">
+                                <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                                    <span class="icon" aria-hidden="true"></span>
+                                </a>
+                            </li>
+                            {% else %}
+                            <li class="page-item page-item-control disabled">
+                                <a class="page-link" href="#" tabindex="-1">&raquo;</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                    {% endif %}
+                </div>
             </div>
-            <h6 class="product-title">{{product.title|safe}}</h6>
-            <div class="product-price-wrap">
-              <div class="product-price">{{product.precio}}</div>
-            </div>
-            <div class="product-button">
-              <!--<div class="button-wrap"><a class="button button-xs button-primary button-winona" href="cart-page.html">Add to cart</a></div>-->
-              <div class="button-wrap"><a class="button button-xs button-secondary button-winona" href="{% url 'product:detail' product.id product.title|slugify %}">Ver Producto</a></div>
-            </div>
-          </article>
         </div>
-        {% endfor %}
-            
-          </div>
-          <div class="pagination-wrap">
-            <!-- Bootstrap Pagination-->
-            {% if is_paginated %}
-              <nav aria-label="Page navigation">
-                <ul class="pagination">
-                  {% if page_obj.has_previous %}
-                    <li class="page-item page-item-control ">
-                      <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
-                        <span class="icon" aria-hidden="true"></span>
-                      </a>
-                    </li>
-                  {% else %}
-                    <li class="page-item page-item-control disabled">
-                      <a class="page-link" href="#" tabindex="-1">&laquo;</a>
-                    </li>
-                  {% endif %}
-                  {% for i in paginator.page_range %}
-                    <li class="page-item {% if page_obj.number == i %}active{% endif %}">
-                      <a class="page-link" href="?page={{ i }}">{{ i }}</a>
-                    </li>
-                  {% endfor %}
-                  {% if page_obj.has_next %}
-                    <li class="page-item page-item-control">
-                      <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
-                        <span class="icon" aria-hidden="true"></span>
-                      </a>
-                    </li>
-                  {% else %}
-                    <li class="page-item page-item-control disabled">
-                      <a class="page-link" href="#" tabindex="-1">&raquo;</a>
-                    </li>
-                  {% endif %}
-                </ul>
-              </nav>
-              {% endif %}
-          </div>
-        </div>
-      </div>
     </div>
-  </section>
+</section>
 
 {% endblock %}

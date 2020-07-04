@@ -35,9 +35,37 @@
 <section class="section section-lg bg-default text-md-left">
   <div class="container">
     <div class="row row-60">
-      
-      <div class="col-lg-12 col-xl-12">
-        <p>{{category.description|safe}}</p>
+      <div class="col-lg-4 col-xl-3">
+          <div class="aside row row-60">
+            <div class="aside-item col-sm-6 col-lg-12">
+              <h6 class="aside-title">Categorias</h6>
+              <ul class="list-marked-2">
+              {% for page in pcat_context %}
+              <li><a href="{% url 'product:category' page.id page.name|slugify %}">{{page.name}}</a></li>
+                {% for subpage in psub_context %}
+                {% if  page.id ==  subpage.categories_id  %}
+                <br>
+                <h6 class="aside-title">Subcategorias</h6>
+                  <li><a href="{% url 'product:subcategory' subpage.id subpage.name|slugify %}">{{subpage.name}}</a></li>
+                {% endif %}
+                {% endfor %}
+              {% endfor %}
+              </ul>
+              <!-- RD Search Form-->
+              <form class="form-search rd-search form-search" action="search-results.html" method="GET">
+                <div class="form-wrap">
+                  <label class="form-label" for="search-form">Buscar..</label>
+                  <input class="form-input" id="search-form" type="text" name="s" autocomplete="off">
+                  <button class="button-search fl-bigmug-line-search74" type="submit"></button>
+                </div>
+              </form>
+            </div>
+            
+            
+          </div>
+        </div>
+      <div class="col-lg-8 col-xl-9">
+        <p>{{subcategory.description|safe}}</p>
         <div class="row row-30 row-md-40 row-xl-60">
           {% for product in subcategory.get_products.all %}
       <div class="col-sm-6 col-xl-4">

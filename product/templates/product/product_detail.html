@@ -131,7 +131,8 @@
                     <div class="unit unit-spacing-1 flex-column align-items-lg-left">
                         <p>Lista de aplicaciones:</p>
                         {% for sub in product.subaplications.all %}
-                        <li>{{sub.name}}</li>
+                        <li>app: {{sub.listaplications}}, id: {{sub.listaplications.id}}</li>
+                        <li>Subapp{{sub.name}}, id: {{sub.id}}</li>
                         {% endfor %}
                     </div>
                 </div>

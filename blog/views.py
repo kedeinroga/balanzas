@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Post, Category
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.views.generic import TemplateView
 
 from django.http import HttpResponse, HttpResponseRedirect
 
@@ -37,7 +38,16 @@ class CategoryDetailView(DetailView):
         #print(context)
         #return context
     
+class SearchView(TemplateView):
+    template_name = 'blog/search.html'
 
+    def get(self, request, *args, **kwargs):
+        q = request.GET.get('q', '')
+        self.results = Post.objects.filter(name__icontains=q)
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(results=self.results, **kwargs)
 
     
 

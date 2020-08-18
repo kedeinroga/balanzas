@@ -28,7 +28,7 @@
 <section class="section section-lg bg-default">
   <div class="container">
     <div class="row row-60 row-xl-75">
-      <div class="col-lg-12">
+      <div class="col-lg-8">
         
         <div class="single-post section-style-2">
           <h5 class="text-spacing-50 font-weight-normal text-transform-none">{{object.title}}</h5>
@@ -53,6 +53,89 @@
         
         
       </div>
+      <div class="col-lg-4">
+              <div class="inset-left-xl-40">
+                <div class="aside row row-60 row-xl-75">
+                  <div class="aside-item col-12">
+                    <!-- RD Search Form-->
+                    <form class="form-search rd-search form-search" action="{% url 'blog:search' %}" method="GET">
+                      <div class="form-wrap">
+                        <label class="form-label" for="search-form-2">Search the blog...</label>
+                        <input class="form-input" id="search-form-2" type="text" name="q" autocomplete="off">
+                        <button class="button-search fl-bigmug-line-search74" type="submit"></button>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="aside-item col-md-6 col-lg-12">
+                    <h6 class="aside-title">Category</h6>
+                    <ul class="list-marked-2 list-category-2">
+                      <li><a href="blog-post.html#">News</a><span class="list-category-number">12</span></li>
+                      <li><a href="blog-post.html#">Repair</a><span class="list-category-number">10</span></li>
+                      <li><a href="blog-post.html#">Personal Computers</a><span class="list-category-number">11</span></li>
+                      <li><a href="blog-post.html#">Laptops</a><span class="list-category-number">14</span></li>
+                    </ul>
+                  </div>
+                  <div class="aside-item col-md-6 col-lg-12">
+                    <h6 class="aside-title">Popular Posts</h6>
+                    <div class="list-popular-post">
+                      <div class="list-popular-post-item">
+                        <!-- Post Minimal-->
+                        <article class="post post-minimal">
+                          <div class="unit unit-spacing-2 align-items-center unit-spacing-md">
+                            <div class="unit-left"><a class="post-minimal-figure" href="blog-post.html"><img src="images/post-13-106x104.jpg" alt="" width="106" height="104"/></a></div>
+                            <div class="unit-body">
+                              <p class="post-minimal-title"><a href="blog-post.html">Replacing a Video Card: 3 Easy Steps</a></p>
+                              <div class="post-minimal-time">
+                                <time datetime="2018-03-15">March 15, 2018</time>
+                              </div>
+                            </div>
+                          </div>
+                        </article>
+                      </div>
+                      <div class="list-popular-post-item">
+                        <!-- Post Minimal-->
+                        <article class="post post-minimal">
+                          <div class="unit unit-spacing-2 align-items-center unit-spacing-md">
+                            <div class="unit-left"><a class="post-minimal-figure" href="blog-post.html"><img src="images/post-14-106x104.jpg" alt="" width="106" height="104"/></a></div>
+                            <div class="unit-body">
+                              <p class="post-minimal-title"><a href="blog-post.html">Installing New Parts into a PC</a></p>
+                              <div class="post-minimal-time">
+                                <time datetime="2018-03-15">March 15, 2018</time>
+                              </div>
+                            </div>
+                          </div>
+                        </article>
+                      </div>
+                      <div class="list-popular-post-item">
+                        <!-- Post Minimal-->
+                        <article class="post post-minimal">
+                          <div class="unit unit-spacing-2 align-items-center unit-spacing-md">
+                            <div class="unit-left"><a class="post-minimal-figure" href="blog-post.html"><img src="images/post-15-106x104.jpg" alt="" width="106" height="104"/></a></div>
+                            <div class="unit-body">
+                              <p class="post-minimal-title"><a href="blog-post.html">How We Repair Smartphones</a></p>
+                              <div class="post-minimal-time">
+                                <time datetime="2018-03-15">March 15, 2018</time>
+                              </div>
+                            </div>
+                          </div>
+                        </article>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="aside-item col-sm-6 col-lg-12">
+                    <h6 class="aside-title">Blog Archive</h6>
+                    <ul class="list-marked-2">
+                      <li><a href="blog-post.html#">September 2018</a></li>
+                      <li><a href="blog-post.html#">August 2018</a></li>
+                    </ul>
+                  </div>
+                  <div class="aside-item col-sm-6 col-lg-12">
+                    <h6 class="aside-title">Tags</h6>
+                    <div class="group-xxs group-middle justify-content-start"><a class="button-tags" href="blog-post.html#">News</a><a class="button-tags" href="blog-post.html#">repair</a><a class="button-tags" href="blog-post.html#">computers</a><a class="button-tags" href="blog-post.html#">maintenance</a><a class="button-tags" href="blog-post.html#">laptops</a><a class="button-tags" href="blog-post.html#">gadgets</a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
       
     </div>
   </div>

@@ -1,0 +1,27 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}Buscar{% endblock %}
+{% block content %}
+<!-- Search results-->
+<section class="section section-lg bg-default">
+<div class="container">
+    <div class="row justify-content-center">
+    <div class="col-lg-9">
+        <!-- RD Search-->
+        <form class="rd-form rd-search rd-form-inline rd-form-inline-centered" action="{% url 'blog:search' %}" method="GET">
+        <div class="form-wrap">
+            <label class="form-label" for="rd-search-form-input">Search</label>
+            <input class="form-input" id="rd-search-form-input" type="text" name="s" autocomplete="off">
+        </div>
+        <div class="form-wrap form-button">
+            <button class="button button-sm button-primary" type="submit">Search</button>
+        </div>
+        </form>
+        <div class="rd-search-results"></div>
+    </div>
+    </div>
+</div>
+</section>
+{% endblock %}
